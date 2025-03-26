@@ -1,0 +1,15 @@
+/home/anphyia/repos/Project-Visify/Backend/CleanArchitecture/CleanArchitecture.Infrastructure/bin/Debug/net8.0/CleanArchitecture.Infrastructure.deps.json
+/home/anphyia/repos/Project-Visify/Backend/CleanArchitecture/CleanArchitecture.Infrastructure/bin/Debug/net8.0/CleanArchitecture.Infrastructure.dll
+/home/anphyia/repos/Project-Visify/Backend/CleanArchitecture/CleanArchitecture.Infrastructure/bin/Debug/net8.0/CleanArchitecture.Infrastructure.pdb
+/home/anphyia/repos/Project-Visify/Backend/CleanArchitecture/CleanArchitecture.Infrastructure/bin/Debug/net8.0/CleanArchitecture.Core.dll
+/home/anphyia/repos/Project-Visify/Backend/CleanArchitecture/CleanArchitecture.Infrastructure/bin/Debug/net8.0/CleanArchitecture.Core.pdb
+/home/anphyia/repos/Project-Visify/Backend/CleanArchitecture/CleanArchitecture.Infrastructure/obj/Debug/net8.0/CleanArchitecture.Infrastructure.csproj.AssemblyReference.cache
+/home/anphyia/repos/Project-Visify/Backend/CleanArchitecture/CleanArchitecture.Infrastructure/obj/Debug/net8.0/CleanArchitecture.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+/home/anphyia/repos/Project-Visify/Backend/CleanArchitecture/CleanArchitecture.Infrastructure/obj/Debug/net8.0/CleanArchitecture.Infrastructure.AssemblyInfoInputs.cache
+/home/anphyia/repos/Project-Visify/Backend/CleanArchitecture/CleanArchitecture.Infrastructure/obj/Debug/net8.0/CleanArchitecture.Infrastructure.AssemblyInfo.cs
+/home/anphyia/repos/Project-Visify/Backend/CleanArchitecture/CleanArchitecture.Infrastructure/obj/Debug/net8.0/CleanArchitecture.Infrastructure.csproj.CoreCompileInputs.cache
+/home/anphyia/repos/Project-Visify/Backend/CleanArchitecture/CleanArchitecture.Infrastructure/obj/Debug/net8.0/CleanArchitecture.Infrastructure.csproj.CopyComplete
+/home/anphyia/repos/Project-Visify/Backend/CleanArchitecture/CleanArchitecture.Infrastructure/obj/Debug/net8.0/CleanArchitecture.Infrastructure.dll
+/home/anphyia/repos/Project-Visify/Backend/CleanArchitecture/CleanArchitecture.Infrastructure/obj/Debug/net8.0/refint/CleanArchitecture.Infrastructure.dll
+/home/anphyia/repos/Project-Visify/Backend/CleanArchitecture/CleanArchitecture.Infrastructure/obj/Debug/net8.0/CleanArchitecture.Infrastructure.pdb
+/home/anphyia/repos/Project-Visify/Backend/CleanArchitecture/CleanArchitecture.Infrastructure/obj/Debug/net8.0/ref/CleanArchitecture.Infrastructure.dll

@@ -1,0 +1,12 @@
+/home/anphyia/repos/Project-Visify/Backend/CleanArchitecture/CleanArchitecture.Application/bin/Debug/net8.0/CleanArchitecture.Core.deps.json
+/home/anphyia/repos/Project-Visify/Backend/CleanArchitecture/CleanArchitecture.Application/bin/Debug/net8.0/CleanArchitecture.Core.dll
+/home/anphyia/repos/Project-Visify/Backend/CleanArchitecture/CleanArchitecture.Application/bin/Debug/net8.0/CleanArchitecture.Core.pdb
+/home/anphyia/repos/Project-Visify/Backend/CleanArchitecture/CleanArchitecture.Application/obj/Debug/net8.0/CleanArchitecture.Core.csproj.AssemblyReference.cache
+/home/anphyia/repos/Project-Visify/Backend/CleanArchitecture/CleanArchitecture.Application/obj/Debug/net8.0/CleanArchitecture.Core.GeneratedMSBuildEditorConfig.editorconfig
+/home/anphyia/repos/Project-Visify/Backend/CleanArchitecture/CleanArchitecture.Application/obj/Debug/net8.0/CleanArchitecture.Core.AssemblyInfoInputs.cache
+/home/anphyia/repos/Project-Visify/Backend/CleanArchitecture/CleanArchitecture.Application/obj/Debug/net8.0/CleanArchitecture.Core.AssemblyInfo.cs
+/home/anphyia/repos/Project-Visify/Backend/CleanArchitecture/CleanArchitecture.Application/obj/Debug/net8.0/CleanArchitecture.Core.csproj.CoreCompileInputs.cache
+/home/anphyia/repos/Project-Visify/Backend/CleanArchitecture/CleanArchitecture.Application/obj/Debug/net8.0/CleanArchitecture.Core.dll
+/home/anphyia/repos/Project-Visify/Backend/CleanArchitecture/CleanArchitecture.Application/obj/Debug/net8.0/refint/CleanArchitecture.Core.dll
+/home/anphyia/repos/Project-Visify/Backend/CleanArchitecture/CleanArchitecture.Application/obj/Debug/net8.0/CleanArchitecture.Core.pdb
+/home/anphyia/repos/Project-Visify/Backend/CleanArchitecture/CleanArchitecture.Application/obj/Debug/net8.0/ref/CleanArchitecture.Core.dll
