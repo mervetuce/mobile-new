@@ -6,6 +6,7 @@ import { UserProvider } from '@/context/UserContext';
 import { ApplicationProvider } from '@/context/ApplicationContext';
 import { ReviewProvider } from '@/context/ReviewContext';
 import { ThemeProvider } from '@/context/ThemeContext';
+import { PackageProvider } from '@/context/PackageContext';
 
 export default function RootLayout() {
   useFrameworkReady();
@@ -15,12 +16,14 @@ export default function RootLayout() {
       <UserProvider>
         <ApplicationProvider>
           <ReviewProvider>
-            <>
-              <Stack screenOptions={{ headerShown: false }}>
-                <Stack.Screen name="+not-found" />
-              </Stack>
-              <StatusBar style="auto" />
-            </>
+            <PackageProvider>
+              <>
+                <Stack screenOptions={{ headerShown: false }}>
+                  <Stack.Screen name="+not-found" />
+                </Stack>
+                <StatusBar style="auto" />
+              </>
+            </PackageProvider>
           </ReviewProvider>
         </ApplicationProvider>
       </UserProvider>
