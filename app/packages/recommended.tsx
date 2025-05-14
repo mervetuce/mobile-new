@@ -1,3 +1,4 @@
+//D:\Masaüstü\project-enson\app\packages\recommended.tsx
 import { useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { router } from 'expo-router';
@@ -60,7 +61,7 @@ export default function RecommendedPackagesScreen() {
 
   const handlePackageSelect = (pkg: typeof recommendedPackages[0]) => {
     setSelectedPackage(pkg);
-    router.push('/packages/summary');
+    router.push({ pathname: '/packages/documents/[id]', params: { id: pkg.id } });
   };
 
   return (

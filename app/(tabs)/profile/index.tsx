@@ -1,7 +1,8 @@
+// D:\Masaüstü\project-enson\app\(tabs)\profile\index.tsx
 import { useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert } from 'react-native';
 import { router } from 'expo-router';
-import { Pencil, Clock, Package, Settings, LogOut, Sparkles } from 'lucide-react-native';
+import { Pencil, Clock, Package, Settings, LogOut, Sparkles, ShoppingCart } from 'lucide-react-native';
 import { useUser } from '@/context/UserContext';
 
 export default function ProfileScreen() {
@@ -119,6 +120,14 @@ export default function ProfileScreen() {
           >
             <Package size={24} color="#000" />
             <Text style={styles.menuText}>My Packages</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity 
+            style={styles.menuItem}
+            onPress={() => router.push('/packages/cart')}
+          >
+            <ShoppingCart size={24} color="#000" />
+            <Text style={styles.menuText}>Cart</Text>
           </TouchableOpacity>
 
           <TouchableOpacity 

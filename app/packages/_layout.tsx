@@ -1,13 +1,21 @@
+// D:\Masaüstü\project-enson\app\packages\_layout.tsx
+
 import { Stack } from 'expo-router';
 
 export default function PackagesLayout() {
   return (
     <Stack>
       <Stack.Screen
-        name="recommended"
+        name="documents/[id]"
         options={{
-          title: 'Recommended Packages',
+          title: 'Required Documents',
           headerShown: true,
+        }}
+      />
+      <Stack.Screen
+        name="documents/details/[section]"
+        options={{
+          headerShown: false,
         }}
       />
       <Stack.Screen

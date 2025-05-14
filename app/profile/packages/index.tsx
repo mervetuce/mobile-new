@@ -1,3 +1,4 @@
+// D:\Masaüstü\project-enson\app\profile\packages\index.tsx
 import { useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { router } from 'expo-router';
@@ -5,7 +6,7 @@ import { Flag, Calendar } from 'lucide-react-native';
 
 const visaPackages = [
   {
-    id: '1',
+    id: 'fr-tourist',
     country: 'France',
     flag: 'https://flagcdn.com/w80/fr.png',
     type: 'Tourist Visa',
@@ -16,7 +17,7 @@ const visaPackages = [
     expiryDate: '2024-07-15',
   },
   {
-    id: '2',
+    id: 'us-b1',
     country: 'United States',
     flag: 'https://flagcdn.com/w80/us.png',
     type: 'Business Visa',
@@ -27,7 +28,7 @@ const visaPackages = [
     expiryDate: '2024-08-01',
   },
   {
-    id: '3',
+    id: 'jp-tourist',
     country: 'Japan',
     flag: 'https://flagcdn.com/w80/jp.png',
     type: 'Tourist Visa',
@@ -38,7 +39,7 @@ const visaPackages = [
     expiryDate: '2024-03-15',
   },
   {
-    id: '4',
+    id: 'ca-work',
     country: 'Canada',
     flag: 'https://flagcdn.com/w80/ca.png',
     type: 'Work Visa',
@@ -162,9 +163,7 @@ export default function PackagesScreen() {
             <TouchableOpacity
               style={styles.detailsButton}
               activeOpacity={0.8}
-              onPress={() =>
-                router.push(`/profile/packages/details/${pkg.type.toLowerCase().replace(/\s+/g, '-')}` as any)
-              }
+              onPress={() => router.push({ pathname: '/packages/documents/[id]', params: { id: pkg.id } })}
             >
               <Text style={styles.detailsButtonText}>View Details →</Text>
             </TouchableOpacity>
