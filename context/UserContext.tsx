@@ -2,6 +2,7 @@ import { createContext, useContext, useState, ReactNode } from 'react';
 import { router } from 'expo-router';
 
 interface User {
+  phone: string;
   id: string;
   name: string;
   email: string;
@@ -22,6 +23,7 @@ const mockUser: User = {
   name: 'John Doe',
   email: 'john.doe@example.com',
   initials: 'JD',
+  phone: ''
 };
 
 export function UserProvider({ children }: { children: ReactNode }) {

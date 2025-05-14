@@ -163,7 +163,7 @@ export default function PackagesScreen() {
               style={styles.detailsButton}
               activeOpacity={0.8}
               onPress={() =>
-                router.push(`/profile/packages/details/${pkg.type.toLowerCase().replace(/\s+/g, '-')}`)
+                router.push(`/profile/packages/details/${pkg.type.toLowerCase().replace(/\s+/g, '-')}` as any)
               }
             >
               <Text style={styles.detailsButtonText}>View Details →</Text>
