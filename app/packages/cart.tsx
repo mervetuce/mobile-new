@@ -1,4 +1,5 @@
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, TextInput } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, TextInput, Alert } from 'react-native';
 import { router } from 'expo-router';
 import { CreditCard, Calendar, Lock } from 'lucide-react-native';
 import { usePackage } from '@/context/PackageContext';
@@ -6,14 +7,47 @@ import { usePackage } from '@/context/PackageContext';
 export default function CartScreen() {
   const { selectedPackage } = usePackage();
 
+  const [cardNumber, setCardNumber] = useState('');
+  const [expiryDate, setExpiryDate] = useState('');
+  const [cvv, setCvv] = useState('');
+  const [cardName, setCardName] = useState('');
+  const [address, setAddress] = useState('');
+  const [city, setCity] = useState('');
+  const [postalCode, setPostalCode] = useState('');
+
+  const [cardNumberError, setCardNumberError] = useState('');
+  const [expiryError, setExpiryError] = useState('');
+  const [cvvError, setCvvError] = useState('');
+
+  const handlePayment = () => {
+    if (cardNumber.replace(/\s/g, '').length !== 16) {
+      Alert.alert('Invalid Card Number', 'Card number must be 16 digits');
+      return;
+    }
+    if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(expiryDate)) {
+      Alert.alert('Invalid Expiry Date', 'Format should be MM/YY');
+      return;
+    }
+    if (cvv.length !== 3) {
+      Alert.alert('Invalid CVV', 'CVV must be 3 digits');
+      return;
+    }
+    if (cardName.trim().length < 3) {
+      Alert.alert('Invalid Name', 'Name on card is too short');
+      return;
+    }
+    if (!address.trim() || !city.trim() || !postalCode.trim()) {
+      Alert.alert('Incomplete Info', 'Please fill out all billing details');
+      return;
+    }
+    router.push('/packages/payment-status');
+  };
+
   if (!selectedPackage) {
     return (
       <View style={styles.container}>
         <Text style={styles.errorText}>No package selected</Text>
-        <TouchableOpacity
-          style={styles.backButton}
-          onPress={() => router.back()}
-        >
+        <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
           <Text style={styles.backButtonText}>Go Back</Text>
         </TouchableOpacity>
       </View>
@@ -45,8 +79,21 @@ export default function CartScreen() {
                   placeholder="1234 5678 9012 3456"
                   keyboardType="numeric"
                   maxLength={19}
+                  value={cardNumber}
+                  onChangeText={(text) => {
+                    const digits = text.replace(/\D/g, '').slice(0, 16);
+                    const formatted = digits.replace(/(.{4})/g, '$1 ').trim();
+                    setCardNumber(formatted);
+                    setCardNumberError(digits.length !== 16 ? 'Card number must be 16 digits' : '');
+                  }}
+                  onBlur={() => {
+                    if (cardNumber.replace(/\s/g, '').length !== 16) {
+                      setCardNumberError('Card number must be 16 digits');
+                    }
+                  }}
                 />
               </View>
+              {cardNumberError ? <Text style={styles.errorMsg}>{cardNumberError}</Text> : null}
             </View>
 
             <View style={styles.row}>
@@ -59,8 +106,54 @@ export default function CartScreen() {
                     placeholder="MM/YY"
                     keyboardType="numeric"
                     maxLength={5}
+                    value={expiryDate}
+                    onChangeText={(text) => {
+                      const digits = text.replace(/\D/g, '').slice(0, 4);
+                      let formatted = digits;
+                      if (digits.length > 2) {
+                        formatted = `${digits.slice(0, 2)}/${digits.slice(2)}`;
+                      }
+                      setExpiryDate(formatted);
+                      const match = formatted.match(/^(\d{2})\/(\d{2})$/);
+                      if (!match) {
+                        setExpiryError('Format must be MM/YY');
+                        return;
+                      }
+                      const inputMonth = parseInt(match[1], 10);
+                      const inputYear = parseInt(match[2], 10);
+                      const currentDate = new Date();
+                      const currentMonth = currentDate.getMonth() + 1;
+                      const currentYear = currentDate.getFullYear() % 100;
+                      if (inputMonth < 1 || inputMonth > 12) {
+                        setExpiryError('Invalid month');
+                      } else if (inputYear < currentYear || (inputYear === currentYear && inputMonth < currentMonth)) {
+                        setExpiryError('Card is expired');
+                      } else {
+                        setExpiryError('');
+                      }
+                    }}
+                    onBlur={() => {
+                      const [month, year] = expiryDate.split('/');
+                      if (!month || !year) {
+                        setExpiryError('Format must be MM/YY');
+                        return;
+                      }
+                      const inputMonth = parseInt(month, 10);
+                      const inputYear = parseInt(year, 10);
+                      const currentDate = new Date();
+                      const currentMonth = currentDate.getMonth() + 1;
+                      const currentYear = currentDate.getFullYear() % 100;
+                      if (isNaN(inputMonth) || inputMonth < 1 || inputMonth > 12) {
+                        setExpiryError('Invalid month');
+                      } else if (inputYear < currentYear || (inputYear === currentYear && inputMonth < currentMonth)) {
+                        setExpiryError('Card is expired');
+                      } else {
+                        setExpiryError('');
+                      }
+                    }}
                   />
                 </View>
+                {expiryError ? <Text style={styles.errorMsg}>{expiryError}</Text> : null}
               </View>
 
               <View style={[styles.inputGroup, styles.flex1]}>
@@ -73,8 +166,20 @@ export default function CartScreen() {
                     keyboardType="numeric"
                     maxLength={3}
                     secureTextEntry
+                    value={cvv}
+                    onChangeText={(text) => {
+                      const digits = text.replace(/\D/g, '').slice(0, 3);
+                      setCvv(digits);
+                      setCvvError(digits.length !== 3 ? 'CVV must be 3 digits' : '');
+                    }}
+                    onBlur={() => {
+                      if (cvv.length !== 3) {
+                        setCvvError('CVV must be 3 digits');
+                      }
+                    }}
                   />
                 </View>
+                {cvvError ? <Text style={styles.errorMsg}>{cvvError}</Text> : null}
               </View>
             </View>
           </View>
@@ -87,6 +192,8 @@ export default function CartScreen() {
             <TextInput
               style={styles.input}
               placeholder="Enter cardholder name"
+              value={cardName}
+              onChangeText={setCardName}
             />
           </View>
 
@@ -95,6 +202,8 @@ export default function CartScreen() {
             <TextInput
               style={styles.input}
               placeholder="Enter street address"
+              value={address}
+              onChangeText={setAddress}
             />
           </View>
 
@@ -104,6 +213,8 @@ export default function CartScreen() {
               <TextInput
                 style={styles.input}
                 placeholder="Enter city"
+                value={city}
+                onChangeText={setCity}
               />
             </View>
 
@@ -113,22 +224,20 @@ export default function CartScreen() {
                 style={styles.input}
                 placeholder="Enter postal code"
                 keyboardType="numeric"
+                value={postalCode}
+                onChangeText={setPostalCode}
               />
             </View>
           </View>
         </View>
 
-        <TouchableOpacity
-          style={styles.payButton}
-          onPress={() => router.push('/packages/payment-status')}
-        >
+        <TouchableOpacity style={styles.payButton} onPress={handlePayment}>
           <Text style={styles.payButtonText}>Pay {selectedPackage.price}</Text>
         </TouchableOpacity>
       </View>
     </ScrollView>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -180,7 +289,8 @@ const styles = StyleSheet.create({
     gap: 16,
   },
   inputGroup: {
-    gap: 8,
+    gap: 4,
+    marginBottom: 8,
   },
   label: {
     fontSize: 14,
@@ -201,6 +311,12 @@ const styles = StyleSheet.create({
     height: 48,
     marginLeft: 8,
     fontSize: 16,
+  },
+  errorMsg: {
+    color: 'red',
+    fontSize: 12,
+    marginTop: 2,
+    marginLeft: 4,
   },
   row: {
     flexDirection: 'row',
