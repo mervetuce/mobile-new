@@ -1,5 +1,5 @@
 import { Tabs } from 'expo-router';
-import { Chrome as Home, FileText, MessageSquare, Clock, User, Newspaper } from 'lucide-react-native';
+import { Chrome as Home, FileText, MessageSquare, Clock, Newspaper, User } from 'lucide-react-native';
 
 export default function TabLayout() {
   return (
@@ -50,14 +50,27 @@ export default function TabLayout() {
           tabBarIcon: ({ color, size }) => <Clock size={size} color={color} />,
         }}
       />
-      <Tabs.Screen
-        name="profile"
+        <Tabs.Screen
+        name="profile/index"
         options={{
           title: 'Profile',
-          headerTitle: 'Profile',
           tabBarIcon: ({ color, size }) => <User size={size} color={color} />,
         }}
       />
-    </Tabs>
-  );
-}
+
+      <Tabs.Screen
+        name="cart"
+        options={{
+          href: null, // Disable tab for cart
+        }}
+      /> 
+    
+      <Tabs.Screen
+        name="profile/settings/index"
+        options={{
+          href: null, // Disable tab for cart
+        }}
+      />   
+     </Tabs>   
+  ); 
+} 

@@ -18,12 +18,33 @@ export default function VisaHistoryScreen() {
   };
 
   const calculateUsage = (startDate: string, endDate: string) => {
-    const start = new Date(startDate);
-    const end = new Date(endDate);
-    const today = new Date();
-    const totalDays = Math.ceil((end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
-    const usedDays = Math.ceil((today.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
-    return { usedDays: Math.min(usedDays, totalDays), totalDays };
+    try {
+      const start = new Date(startDate);
+      const end = new Date(endDate);
+      const today = new Date();
+
+      if (isNaN(start.getTime()) || isNaN(end.getTime())) {
+        return { usedDays: 0, totalDays: 0 };
+      }
+
+      const totalDays = Math.ceil((end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
+      const usedDays = Math.ceil((today.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
+      return { 
+        usedDays: Math.max(0, Math.min(usedDays, totalDays)), 
+        totalDays: Math.max(0, totalDays) 
+      };
+    } catch {
+      return { usedDays: 0, totalDays: 0 };
+    }
+  };
+
+  const formatDate = (dateString: string) => {
+    try {
+      const date = new Date(dateString);
+      return isNaN(date.getTime()) ? 'Invalid Date' : date.toLocaleDateString();
+    } catch {
+      return 'Invalid Date';
+    }
   };
 
   return (
@@ -36,7 +57,7 @@ export default function VisaHistoryScreen() {
           <View key={visa.id} style={styles.visaCard}>
             <View style={styles.header}>
               <View>
-                <Text style={styles.country}>{visa.country}</Text>
+                <Text style={styles.country}>{visa.country || 'Unknown Country'}</Text>
                 <Text style={styles.visaType}>{visa.visaType}</Text>
                 <Text style={styles.entryType}>Multiple Entry</Text>
               </View>
@@ -52,22 +73,22 @@ export default function VisaHistoryScreen() {
 
             <View style={styles.validityContainer}>
               <Text style={styles.validityText}>
-                Valid from {new Date(visa.submissionDate).toLocaleDateString()} to{' '}
-                {new Date(visa.expiryDate).toLocaleDateString()}
+                Valid from {formatDate(visa.submissionDate)} to{' '}
+                {formatDate(visa.expiryDate || '')}
               </Text>
             </View>
 
             <View style={styles.usageContainer}>
               <View style={styles.usageHeader}>
                 <Text style={styles.usageText}>
-                  {usedDays} of {totalDays} days used
+                  {!isNaN(usedDays) ? usedDays : 0} of {!isNaN(totalDays) ? totalDays : 0} days used
                 </Text>
               </View>
               <View style={styles.progressBar}>
                 <View 
                   style={[
                     styles.progressFill,
-                    { width: `${progress}%` }
+                    { width: `${!isNaN(progress) ? Math.min(progress, 100) : 0}%` }
                   ]} 
                 />
               </View>

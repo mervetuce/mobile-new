@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { router } from 'expo-router';
-import { Flag, Calendar } from 'lucide-react-native';
+import { Flag, Calendar, ArrowLeft } from 'lucide-react-native';
 
 const visaPackages = [
   {
@@ -87,8 +87,16 @@ export default function PackagesScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.title}>My Packages</Text>
-        <Text style={styles.subtitle}>View and manage your visa packages</Text>
+        <TouchableOpacity 
+          style={styles.backButton}
+          onPress={() => router.back()}
+        >
+          <ArrowLeft size={24} color="#000" />
+        </TouchableOpacity>
+        <View style={styles.headerContent}>
+          <Text style={styles.title}>My Packages</Text>
+          <Text style={styles.subtitle}>View and manage your visa packages</Text>
+        </View>
       </View>
 
       <ScrollView 
@@ -176,7 +184,19 @@ export default function PackagesScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#fff' },
-  header: { padding: 20, backgroundColor: '#f8f9fa' },
+  header: { 
+    padding: 20, 
+    backgroundColor: '#f8f9fa',
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    gap: 16,
+  },
+  headerContent: {
+    flex: 1,
+  },
+  backButton: {
+    padding: 4,
+  },
   title: { fontSize: 24, fontWeight: 'bold', marginBottom: 8 },
   subtitle: { fontSize: 16, color: '#666' },
   filtersContainer: {
